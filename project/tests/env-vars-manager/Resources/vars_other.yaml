@@ -1,0 +1,5 @@
+vars:
+  INT_VAR: int
+  STRING_VAR: string
+  BOOL_VAR: bool
+  OTHER_BOOL_VAR: bool

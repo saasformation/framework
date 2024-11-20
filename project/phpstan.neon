@@ -1,0 +1,7 @@
+parameters:
+	level: 9
+	paths:
+		- packages/contracts/src
+		- packages/env-vars-manager/src
+		- packages/projects/src
+		- tests

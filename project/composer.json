@@ -1,0 +1,48 @@
+{
+    "name": "saasformation/framework",
+    "description": "Very opinionated framework to develop monoliths and microservices with event sourcing",
+    "license": "MIT",
+    "type": "metapackage",
+    "authors": [
+        {
+            "name": "SaaSFormation",
+            "email": "info@saasformation.com"
+        }
+    ],
+    "require": {
+        "ext-pcntl": "*",
+        "league/route": "^6",
+        "monolog/monolog": "^3",
+        "php": "^8.3",
+        "psr/container": "^2",
+        "psr/http-message": "^1",
+        "react/http": "^1.10",
+        "react/socket": "^1.16",
+        "symfony/config": "^7",
+        "symfony/dependency-injection": "^7",
+        "symfony/yaml": "^7"
+    },
+    "require-dev": {
+        "symplify/monorepo-builder": "^11.2",
+        "phpunit/phpunit": "^11.4",
+        "phpstan/phpstan": "^2.0"
+    },
+    "replace": {
+        "saasformation/framework-contracts": "self.version",
+        "saasformation/framework-env-vars-manager": "self.version",
+        "saasformation/framework-projects": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+            "SaaSFormation\\Framework\\Contracts\\": "packages/contracts/src",
+            "SaaSFormation\\Framework\\EnvVarsManager\\": "packages/env-vars-manager/src",
+            "SaaSFormation\\Framework\\Projects\\": "packages/projects/src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SaaSFormation\\Framework\\Tests\\EnvVarsManager\\": "tests/env-vars-manager",
+            "SaaSFormation\\Framework\\Tests\\Projects\\": "tests/projects"
+        }
+    }
+}

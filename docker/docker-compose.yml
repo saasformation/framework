@@ -1,0 +1,18 @@
+services:
+  php-cli:
+    image: ghcr.io/saasformation/base-php-cli-8.3:latest
+    volumes:
+      - ../project:/var/www
+    environment:
+      INT_VAR: 25
+      STRING_VAR: foo
+      BOOL_VAR: false
+    networks:
+      - framework
+
+  composer:
+    extends:
+      service: php-cli
+
+networks:
+  framework:
