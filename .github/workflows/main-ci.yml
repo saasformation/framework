@@ -45,7 +45,7 @@ jobs:
             split_repository: 'framework-projects'
     needs: test
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: "symplify/monorepo-split-github-action@ac9845270ef47266435b4f124b133a323619e738"
         if: "!startsWith(github.ref, 'refs/tags/')"
         with:
