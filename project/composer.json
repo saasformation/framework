@@ -1,5 +1,6 @@
 {
     "name": "saasformation/framework",
+    "version": "0.1.0",
     "description": "Very opinionated framework to develop monoliths and microservices with event sourcing",
     "license": "MIT",
     "type": "metapackage",
