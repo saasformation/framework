@@ -13,6 +13,10 @@ composer() {
   ${DOCKER_COMPOSE} run --remove-orphans --rm composer composer "$@"
 }
 
+monorepo() {
+  ${DOCKER_COMPOSE} run --remove-orphans --rm php-cli vendor/bin/monorepo-builder "$@"
+}
+
 test() {
   ${DOCKER_COMPOSE} run --remove-orphans --rm php-cli vendor/bin/phpstan
   ${DOCKER_COMPOSE} run --remove-orphans --rm php-cli vendor/bin/phpunit
@@ -22,9 +26,12 @@ case "$method" in
   composer)
     composer "$@"
     ;;
+  monorepo)
+    monorepo "$@"
+    ;;
   test)
     test "$@"
     ;;
   *)
-    echo "You must provide a method to execute [composer, test]"
+    echo "You must provide a method to execute [composer, monorepo, test]"
 esac

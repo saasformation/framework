@@ -16,14 +16,17 @@
     "require": {
         "php": "^8.3",
         "ext-pcntl": "*",
-        "saasformation/framework-contracts": "0.1.0",
-        "saasformation/framework-env-vars-manager": "0.1.0",
+        "saasformation/framework-contracts": "0.2.0",
+        "saasformation/framework-env-vars-manager": "0.2.0",
         "symfony/dependency-injection": "^7",
         "symfony/yaml": "^7",
         "symfony/config": "^7",
         "react/http": "^1.10",
         "react/socket": "^1.16",
         "league/route": "^6",
-        "monolog/monolog": "^3"
+        "monolog/monolog": "^3",
+        "league/tactician": "^1",
+        "league/tactician-container": "^3",
+        "league/tactician-logger": "^0.11"
     }
 }

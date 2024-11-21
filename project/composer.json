@@ -1,9 +1,9 @@
 {
     "name": "saasformation/framework",
-    "version": "0.1.0",
     "description": "Very opinionated framework to develop monoliths and microservices with event sourcing",
     "license": "MIT",
     "type": "metapackage",
+    "version": "0.2.0",
     "authors": [
         {
             "name": "SaaSFormation",
@@ -13,6 +13,9 @@
     "require": {
         "ext-pcntl": "*",
         "league/route": "^6",
+        "league/tactician": "^1",
+        "league/tactician-container": "^3",
+        "league/tactician-logger": "^0.11",
         "monolog/monolog": "^3",
         "php": "^8.3",
         "psr/container": "^2",
@@ -24,9 +27,9 @@
         "symfony/yaml": "^7"
     },
     "require-dev": {
-        "symplify/monorepo-builder": "^11.2",
+        "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^11.4",
-        "phpstan/phpstan": "^2.0"
+        "symplify/monorepo-builder": "^11.2"
     },
     "replace": {
         "saasformation/framework-contracts": "self.version",
