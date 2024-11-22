@@ -11,6 +11,7 @@
     ],
     "require": {
         "ext-pcntl": "*",
+        "guzzlehttp/guzzle": "^7.9",
         "league/route": "^6",
         "league/tactician": "^1",
         "league/tactician-container": "^3",

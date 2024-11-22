@@ -4,5 +4,5 @@ namespace SaaSFormation\Framework\Contracts\Application\Bus;
 
 interface CommandInterface
 {
-    public function name(): string;
+    public function code(): string;
 }

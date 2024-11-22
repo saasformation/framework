@@ -77,5 +77,11 @@ services:
 
   SaaSFormation\Framework\Projects\Infrastructure\Identity\RamseyBasedUUIDFactory:
 
+  SaaSFormation\Framework\Projects\Infrastructure\KurrentBasedWriteModelRepository:
+    arguments:
+      $eventStoreClient:
+      $logger: '@default_logger'
+
   Psr\Log\LoggerInterface: '@default_logger'
+  SaaSFormation\Framework\Contracts\Domain\WriteModelRepositoryInterface: '@SaaSFormation\Framework\Projects\Infrastructure\KurrentBasedWriteModelRepository'
   SaaSFormation\Framework\Contracts\Common\Identity\UUIDFactoryInterface: '@SaaSFormation\Framework\Projects\Infrastructure\Identity\RamseyBasedUUIDFactory'
