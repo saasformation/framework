@@ -3,7 +3,6 @@
     "description": "Very opinionated framework to develop monoliths and microservices with event sourcing",
     "license": "MIT",
     "type": "metapackage",
-    "version": "0.2.0",
     "authors": [
         {
             "name": "SaaSFormation",
@@ -47,6 +46,11 @@
         "psr-4": {
             "SaaSFormation\\Framework\\Tests\\EnvVarsManager\\": "tests/env-vars-manager",
             "SaaSFormation\\Framework\\Tests\\Projects\\": "tests/projects"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
         }
     }
 }
