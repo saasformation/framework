@@ -17,12 +17,6 @@ services:
       $formatter: '@SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianQueryBusLogFormatter'
       $logger: '@default_logger'
 
-  tactician_eventbus_logger_middleware:
-    class: League\Tactician\Logger\LoggerMiddleware
-    arguments:
-      $formatter: '@SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianEventBusLogFormatter'
-      $logger: '@default_logger'
-
   League\Tactician\Handler\MethodNameInflector\HandleInflector:
 
   League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor:
@@ -37,14 +31,14 @@ services:
       $container: '@service_container'
       $logger: '@default_logger'
 
-  SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianEventBusInterfaceBasedHandlerLocator:
+  SaaSFormation\Framework\Projects\Infrastructure\EventDispatcher\EventDispatcher:
     arguments:
       $container: '@service_container'
       $logger: '@default_logger'
 
-  tactician_commandbus_command_handler_middleware:
-    class: League\Tactician\Handler\CommandHandlerMiddleware
+  SaaSFormation\Framework\Projects\Infrastructure\Bus\CommandBusSendEventsToEventStreamMiddleware:
     arguments:
+      $eventDispatcher: '@SaaSFormation\Framework\Projects\Infrastructure\EventDispatcher\EventDispatcher'
       $commandNameExtractor: '@League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor'
       $handlerLocator: '@SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianCommandBusInterfaceBasedHandlerLocator'
       $methodNameInflector: '@League\Tactician\Handler\MethodNameInflector\HandleInflector'
@@ -56,23 +50,11 @@ services:
       $handlerLocator: '@SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianQueryBusInterfaceBasedHandlerLocator'
       $methodNameInflector: '@League\Tactician\Handler\MethodNameInflector\HandleInflector'
 
-  tactician_eventbus_command_handler_middleware:
-    class: League\Tactician\Handler\CommandHandlerMiddleware
-    arguments:
-      $commandNameExtractor: '@League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor'
-      $handlerLocator: '@SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianEventBusInterfaceBasedHandlerLocator'
-      $methodNameInflector: '@League\Tactician\Handler\MethodNameInflector\HandleInflector'
-
-  SaaSFormation\Framework\Projects\Infrastructure\Bus\CommandBusSendEventsToEventStreamMiddleware:
-    arguments:
-      $eventBus: '@SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianBasedEventBus'
-
   tactician_command_bus:
     class: League\Tactician\CommandBus
     arguments:
       -
         - '@tactician_commandbus_logger_middleware'
-        - '@tactician_commandbus_command_handler_middleware'
         - '@SaaSFormation\Framework\Projects\Infrastructure\Bus\CommandBusSendEventsToEventStreamMiddleware'
 
   tactician_query_bus:
@@ -82,13 +64,6 @@ services:
         - '@tactician_querybus_logger_middleware'
         - '@tactician_querybus_command_handler_middleware'
 
-  tactician_event_bus:
-    class: League\Tactician\CommandBus
-    arguments:
-      -
-        - '@tactician_eventbus_logger_middleware'
-        - '@tactician_eventbus_command_handler_middleware'
-
   SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianBasedCommandBus:
     arguments:
       - '@tactician_command_bus'
@@ -96,10 +71,6 @@ services:
   SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianBasedQueryBus:
     arguments:
       - '@tactician_query_bus'
-
-  SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianBasedEventBus:
-    arguments:
-      - '@tactician_event_bus'
 
   SaaSFormation\Framework\Projects\UI\API\HTTP\ReactPHPBasedJSONResponder:
 

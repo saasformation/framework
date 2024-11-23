@@ -6,5 +6,5 @@ use SaaSFormation\Framework\Contracts\Domain\DomainEventStream;
 
 interface CommandBusInterface
 {
-    public function handle(CommandInterface $command): DomainEventStream;
+    public function handle(CommandInterface $command): void;
 }

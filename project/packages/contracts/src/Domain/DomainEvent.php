@@ -16,6 +16,6 @@ readonly abstract class DomainEvent implements ArrayableInterface
         return $this->id;
     }
 
-    public abstract function code(): string;
+    public static abstract function code(): string;
     public abstract function version(): int;
 }
