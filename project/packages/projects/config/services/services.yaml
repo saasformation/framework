@@ -1,4 +1,12 @@
 services:
+  SaaSFormation\Framework\Projects\Infrastructure\ReadModel\MongoDBClientProvider:
+    arguments:
+      $envVarsManager: '@default_env_vars_manager'
+
+  SaaSFormation\Framework\Projects\Infrastructure\KurrentClientProvider:
+    arguments:
+      $envVarsManager: '@default_env_vars_manager'
+
   SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianCommandBusLogFormatter:
 
   SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianQueryBusLogFormatter:
@@ -86,10 +94,16 @@ services:
 
   SaaSFormation\Framework\Projects\Infrastructure\Identity\RamseyBasedUUIDFactory:
 
+  SaaSFormation\Framework\Projects\Infrastructure\ReadModel\MongoDBBasedReadModelRepository:
+    arguments:
+      $mongoDBClientProvider: '@SaaSFormation\Framework\Projects\Infrastructure\ReadModel\MongoDBClientProvider'
+      $logger: '@default_logger'
+
   SaaSFormation\Framework\Projects\Infrastructure\KurrentBasedWriteModelRepository:
     arguments:
-      $eventStoreClient:
+      $kurrentClientProvider: '@SaaSFormation\Framework\Projects\Infrastructure\KurrentClientProvider'
       $logger: '@default_logger'
+      $uuidFactory: '@SaaSFormation\Framework\Contracts\Common\Identity\UUIDFactoryInterface'
 
   Psr\Log\LoggerInterface: '@default_logger'
   SaaSFormation\Framework\Contracts\Domain\WriteModelRepositoryInterface: '@SaaSFormation\Framework\Projects\Infrastructure\KurrentBasedWriteModelRepository'

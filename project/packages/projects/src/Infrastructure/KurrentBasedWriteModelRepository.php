@@ -1,10 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace SaaSFormation\Framework\Projects\Infrastructure;
 
 use GuzzleHttp\Client;
 use Psr\Log\LoggerInterface;
 use SaaSFormation\Framework\Contracts\Common\Identity\IdInterface;
+use SaaSFormation\Framework\Contracts\Common\Identity\UUIDFactoryInterface;
 use SaaSFormation\Framework\Contracts\Domain\Aggregate;
 use SaaSFormation\Framework\Contracts\Domain\DomainEvent;
 use SaaSFormation\Framework\Contracts\Domain\DomainEventStream;
@@ -12,9 +13,11 @@ use SaaSFormation\Framework\Contracts\Domain\WriteModelRepositoryInterface;
 
 readonly class KurrentBasedWriteModelRepository implements WriteModelRepositoryInterface
 {
-    public function __construct(private Client $eventStoreClient, private LoggerInterface $logger)
-    {
+    private Client $client;
 
+    public function __construct(private KurrentClientProvider $kurrentClientProvider, private LoggerInterface $logger, private UUIDFactoryInterface $uuidFactory)
+    {
+        $this->client = $this->kurrentClientProvider->provide();
     }
 
     public function save(Aggregate $aggregate): void
@@ -34,17 +37,20 @@ readonly class KurrentBasedWriteModelRepository implements WriteModelRepositoryI
             $this->logTryingToPush($aggregateId);
             $events = array_map(function (DomainEvent $event) {
                 return [
-                    "eventId" => $event->id()->humanReadable(),
+                    "eventId" => $event->id() ? $event->id()->humanReadable() : $this->uuidFactory->generate()->humanReadable(),
                     "eventType" => $event->code(),
                     "data" => $event->toArray()
                 ];
             }, $eventStream->events());
-            $this->eventStoreClient->post("/streams/$streamName", [
+            $response = $this->client->post("/streams/$streamName", [
                 'headers' => [
                     'content-type' => 'application/vnd.eventstore.events+json',
                 ],
                 'body' => json_encode($events),
             ]);
+            if($response->getStatusCode() !== 201) {
+                throw new \Exception("Failed to push events for $streamName");
+            }
             $this->logPushed($aggregateId);
         } catch (\Throwable $e) {
             $this->logFailedToPush($e, $aggregateId);
