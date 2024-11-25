@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df9156cc4781980f143e85711127aa96",
+    "content-hash": "ea4f5277e9226efac11563beb877a9df",
     "packages": [
         {
             "name": "brick/math",
@@ -2234,6 +2234,86 @@
                 }
             ],
             "time": "2024-06-11T12:45:25+00:00"
+        },
+        {
+            "name": "saasformation/array-by-path",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SaaSFormationCOM/array-by-path.git",
+                "reference": "dc3ea7d8e28e0a558cbf89130f92b100d5a9a32e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SaaSFormationCOM/array-by-path/zipball/dc3ea7d8e28e0a558cbf89130f92b100d5a9a32e",
+                "reference": "dc3ea7d8e28e0a558cbf89130f92b100d5a9a32e",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SaaSFormation\\ArrayByPath\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SaaSFormation",
+                    "email": "info@saasformation.com"
+                }
+            ],
+            "description": "Library to get/set on an array using a dotted path",
+            "support": {
+                "issues": "https://github.com/SaaSFormationCOM/array-by-path/issues",
+                "source": "https://github.com/SaaSFormationCOM/array-by-path/tree/1.0.0"
+            },
+            "time": "2022-04-06T17:11:21+00:00"
+        },
+        {
+            "name": "saasformation/magic-field",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SaaSFormationCOM/magic-field.git",
+                "reference": "8f359733611537ad222e384bf5b64a86c7989733"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SaaSFormationCOM/magic-field/zipball/8f359733611537ad222e384bf5b64a86c7989733",
+                "reference": "8f359733611537ad222e384bf5b64a86c7989733",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SaaSFormation\\Field\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SaaSFormation",
+                    "email": "info@saasformation.com"
+                }
+            ],
+            "description": "MagicField is a library to convert mixed values into desired typed values -when doable.",
+            "support": {
+                "issues": "https://github.com/SaaSFormationCOM/magic-field/issues",
+                "source": "https://github.com/SaaSFormationCOM/magic-field/tree/1.0.3"
+            },
+            "time": "2022-08-30T16:56:23+00:00"
         },
         {
             "name": "symfony/config",

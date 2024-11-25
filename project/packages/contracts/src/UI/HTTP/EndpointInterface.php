@@ -2,7 +2,9 @@
 
 namespace SaaSFormation\Framework\Contracts\UI\HTTP;
 
+use Psr\Http\Message\ServerRequestInterface;
+
 interface EndpointInterface
 {
-    public function execute(): ArrayableInterface;
+    public function execute(ServerRequestInterface $request): ArrayableInterface;
 }
