@@ -10,8 +10,10 @@
         }
     ],
     "require": {
+        "beberlei/assert": "^3.3",
         "ext-mongodb": "*",
         "ext-pcntl": "*",
+        "ext-pdo": "*",
         "guzzlehttp/guzzle": "^7.9",
         "league/route": "^6",
         "league/tactician": "^1",
