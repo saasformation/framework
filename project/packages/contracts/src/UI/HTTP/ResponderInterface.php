@@ -14,5 +14,5 @@ interface ResponderInterface
      * @param array<string, string>|null $headers
      * @return ResponseInterface
      */
-    public function respond(StatusEnum $statusCode, array $data = null, array $headers = null): ResponseInterface;
+    public function respond(StatusEnum $statusCode, ?array $data = null, ?array $headers = null): ResponseInterface;
 }

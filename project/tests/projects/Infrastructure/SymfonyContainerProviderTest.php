@@ -2,10 +2,11 @@
 
 namespace SaaSFormation\Framework\Tests\Projects\Infrastructure;
 
-use Monolog\Logger;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
-use SaaSFormation\Framework\EnvVarsManager\Infrastructure\EnvVarsManager;
+use PHPUnit\Framework\MockObject\MockObject;
+use SaaSFormation\Framework\Contracts\Infrastructure\EnvVarsManagerInterface;
+use SaaSFormation\Framework\Contracts\Infrastructure\KernelInterface;
 use SaaSFormation\Framework\Projects\Infrastructure\SymfonyContainerProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,12 +18,14 @@ class SymfonyContainerProviderTest extends TestCase
     public function aProperSymfonyContainerIsProvidedWhenAValidServicesFilePathIsProvided(): void
     {
         // Arrange
-        $logger = new Logger("test");
-        $envVarsProvider = $this->createMock(EnvVarsManager::class);
+        /** @var KernelInterface&MockObject $kernel */
+        $kernel = $this->createMock(KernelInterface::class);
+        /** @var EnvVarsManagerInterface&MockObject $envVarsManager */
+        $envVarsManager = $this->createMock(EnvVarsManagerInterface::class);
         $symfonyContainerProvider = new SymfonyContainerProvider(__DIR__ . "/../Resources/services.yaml");
 
         // Act
-        $symfonyContainerBuilder = $symfonyContainerProvider->provide($logger, $envVarsProvider);
+        $symfonyContainerBuilder = $symfonyContainerProvider->provide($kernel, $envVarsManager);
 
         // Assert
         $this->assertInstanceOf(ContainerBuilder::class, $symfonyContainerBuilder);

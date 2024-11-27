@@ -5,3 +5,5 @@ parameters:
 		- packages/env-vars-manager/src
 		- packages/projects/src
 		- tests
+includes:
+    - vendor/phpstan/phpstan-beberlei-assert/extension.neon
