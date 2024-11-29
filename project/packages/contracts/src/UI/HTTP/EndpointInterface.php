@@ -6,5 +6,5 @@ use Psr\Http\Message\ServerRequestInterface;
 
 interface EndpointInterface
 {
-    public function execute(ServerRequestInterface $request): ArrayableInterface;
+    public function execute(ServerRequestInterface $request): ArrayableInterface|EmptyBodyInterface;
 }
