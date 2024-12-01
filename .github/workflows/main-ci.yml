@@ -43,6 +43,8 @@ jobs:
             split_repository: 'framework-env-vars-manager'
           - local_path: 'projects'
             split_repository: 'framework-projects'
+          - local_path: 'testing'
+            split_repository: 'framework-testing'
     needs: test
     steps:
       - uses: actions/checkout@v4

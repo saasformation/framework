@@ -23,6 +23,7 @@
         "mongodb/mongodb": "^1.20",
         "monolog/monolog": "^3",
         "php": "^8.3",
+        "phpunit/phpunit": "^11.4",
         "psr/container": "^2",
         "psr/http-message": "^1",
         "ramsey/uuid": "^4.7",
@@ -36,20 +37,21 @@
     },
     "require-dev": {
         "phpstan/phpstan": "^2.0",
-        "phpunit/phpunit": "^11.4",
-        "symplify/monorepo-builder": "^11.2",
-        "phpstan/phpstan-beberlei-assert": "^2.0"
+        "phpstan/phpstan-beberlei-assert": "^2.0",
+        "symplify/monorepo-builder": "^11.2"
     },
     "replace": {
         "saasformation/framework-contracts": "self.version",
         "saasformation/framework-env-vars-manager": "self.version",
-        "saasformation/framework-projects": "self.version"
+        "saasformation/framework-projects": "self.version",
+        "saasformation/framework-testing": "self.version"
     },
     "autoload": {
         "psr-4": {
             "SaaSFormation\\Framework\\Contracts\\": "packages/contracts/src",
             "SaaSFormation\\Framework\\EnvVarsManager\\": "packages/env-vars-manager/src",
-            "SaaSFormation\\Framework\\Projects\\": "packages/projects/src"
+            "SaaSFormation\\Framework\\Projects\\": "packages/projects/src",
+            "SaaSFormation\\Framework\\Testing\\": "packages/testing/src"
         }
     },
     "autoload-dev": {
