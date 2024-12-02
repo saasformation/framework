@@ -15,5 +15,6 @@ enum StatusEnum: int
     case HTTP_NOT_FOUND = 404;
     case HTTP_METHOD_NOT_ALLOWED = 405;
     case HTTP_NOT_ACCEPTABLE = 406;
+    case HTTP_CONFLICT = 409;
     case HTTP_GENERAL_ERROR = 500;
 }
