@@ -45,7 +45,7 @@ trait PageableResponseBody
     /**
      * @return array{'page': int, 'per_page': int, 'total_results': int, 'total_pages': int}
      */
-    public function toArray(): array
+    public function paginationArray(): array
     {
         return [
             'page' => $this->page,

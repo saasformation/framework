@@ -17,7 +17,7 @@ class MockPageableResponseBodyTest extends TestCase
         $mockPageablePageableResponseBody = new MockPageableResponseBody($expectedPage, $expectedPerPage, $expectedTotalResults, $expectedTotalPages);
 
         // Act
-        $data = $mockPageablePageableResponseBody->toArray();
+        $data = $mockPageablePageableResponseBody->paginationArray();
 
         // Assert
         $this->assertEquals([
