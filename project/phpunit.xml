@@ -13,6 +13,9 @@
          failOnRisky="true"
          failOnWarning="true">
     <testsuites>
+        <testsuite name="contracts">
+            <directory>tests/contracts</directory>
+        </testsuite>
         <testsuite name="projects">
             <directory>tests/projects</directory>
         </testsuite>

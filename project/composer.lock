@@ -3253,16 +3253,16 @@
         },
         {
             "name": "saasformation/magic-field",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SaaSFormationCOM/magic-field.git",
-                "reference": "8f359733611537ad222e384bf5b64a86c7989733"
+                "reference": "a2c26c18f7a222eb2cc5ccfc1e1af739580f405a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SaaSFormationCOM/magic-field/zipball/8f359733611537ad222e384bf5b64a86c7989733",
-                "reference": "8f359733611537ad222e384bf5b64a86c7989733",
+                "url": "https://api.github.com/repos/SaaSFormationCOM/magic-field/zipball/a2c26c18f7a222eb2cc5ccfc1e1af739580f405a",
+                "reference": "a2c26c18f7a222eb2cc5ccfc1e1af739580f405a",
                 "shasum": ""
             },
             "require-dev": {
@@ -3287,9 +3287,9 @@
             "description": "MagicField is a library to convert mixed values into desired typed values -when doable.",
             "support": {
                 "issues": "https://github.com/SaaSFormationCOM/magic-field/issues",
-                "source": "https://github.com/SaaSFormationCOM/magic-field/tree/1.0.3"
+                "source": "https://github.com/SaaSFormationCOM/magic-field/tree/1.0.4"
             },
-            "time": "2022-08-30T16:56:23+00:00"
+            "time": "2024-12-01T09:23:56+00:00"
         },
         {
             "name": "sebastian/cli-parser",
