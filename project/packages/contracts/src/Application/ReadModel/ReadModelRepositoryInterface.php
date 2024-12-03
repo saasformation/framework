@@ -16,7 +16,7 @@ interface ReadModelRepositoryInterface
 
     /**
      * @param array<string, mixed> $criteria
-     * @return array|ReadModel[]
+     * @return RepositoryCollectionResult
      */
-    public function findByCriteria(array $criteria): array;
+    public function findByCriteria(array $criteria): RepositoryCollectionResult;
 }
