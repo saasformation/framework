@@ -45,6 +45,8 @@ jobs:
             split_repository: 'framework-projects'
           - local_path: 'testing'
             split_repository: 'framework-testing'
+          - local_path: 'console'
+            split_repository: 'framework-console'
     needs: test
     steps:
       - uses: actions/checkout@v4

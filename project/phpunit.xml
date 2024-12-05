@@ -16,6 +16,9 @@
         <testsuite name="contracts">
             <directory>tests/contracts</directory>
         </testsuite>
+        <testsuite name="console">
+            <directory>tests/console</directory>
+        </testsuite>
         <testsuite name="projects">
             <directory>tests/projects</directory>
         </testsuite>

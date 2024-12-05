@@ -16,6 +16,7 @@
         "ext-pcntl": "*",
         "ext-pdo": "*",
         "guzzlehttp/guzzle": "^7.9",
+        "league/climate": "^3.10",
         "league/route": "^6",
         "league/tactician": "^1",
         "league/tactician-container": "^3",
@@ -41,6 +42,7 @@
         "symplify/monorepo-builder": "^11.2"
     },
     "replace": {
+        "saasformation/framework-console": "self.version",
         "saasformation/framework-contracts": "self.version",
         "saasformation/framework-env-vars-manager": "self.version",
         "saasformation/framework-projects": "self.version",
@@ -48,6 +50,7 @@
     },
     "autoload": {
         "psr-4": {
+            "SaaSFormation\\Framework\\Console\\": "packages/console/src",
             "SaaSFormation\\Framework\\Contracts\\": "packages/contracts/src",
             "SaaSFormation\\Framework\\EnvVarsManager\\": "packages/env-vars-manager/src",
             "SaaSFormation\\Framework\\Projects\\": "packages/projects/src",
@@ -56,6 +59,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "SaaSFormation\\Framework\\Tests\\Console\\": "tests/console",
             "SaaSFormation\\Framework\\Tests\\Contracts\\": "tests/contracts",
             "SaaSFormation\\Framework\\Tests\\EnvVarsManager\\": "tests/env-vars-manager",
             "SaaSFormation\\Framework\\Tests\\Projects\\": "tests/projects"
