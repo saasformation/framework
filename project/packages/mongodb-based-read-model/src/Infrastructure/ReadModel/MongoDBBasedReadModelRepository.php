@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace SaaSFormation\Framework\Projects\Infrastructure\ReadModel;
+namespace SaaSFormation\Framework\MongoDBBasedReadModel\Infrastructure\ReadModel;
 
-use MongoDB\BSON\ObjectId;
 use MongoDB\Client;
 use Psr\Log\LoggerInterface;
 use SaaSFormation\Framework\Contracts\Application\ReadModel\ReadModel;

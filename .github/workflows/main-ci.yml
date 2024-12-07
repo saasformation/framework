@@ -49,6 +49,8 @@ jobs:
             split_repository: 'framework-console'
           - local_path: 'mysql-based-write-model'
             split_repository: 'framework-mysql-based-write-model'
+          - local_path: 'mongodb-based-read-model'
+            split_repository: 'framework-mongodb-based-read-model'
     needs: test
     steps:
       - uses: actions/checkout@v4
