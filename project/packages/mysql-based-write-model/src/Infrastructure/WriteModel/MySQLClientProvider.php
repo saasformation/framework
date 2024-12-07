@@ -1,16 +1,19 @@
 <?php
 
-namespace SaaSFormation\Framework\Projects\Infrastructure;
+namespace SaaSFormation\Framework\MySQLBasedWriteModel\Infrastructure\WriteModel;
 
+use Psr\Log\LoggerInterface;
+use SaaSFormation\Framework\Contracts\Common\Identity\UUIDFactoryInterface;
 use SaaSFormation\Framework\Contracts\Infrastructure\EnvVarsManagerInterface;
+use SaaSFormation\Framework\Contracts\Infrastructure\WriteModel\ClientProviderInterface;
 
-class MySQLClientProvider
+readonly class MySQLClientProvider implements ClientProviderInterface
 {
     public function __construct(private EnvVarsManagerInterface $envVarsManager)
     {
     }
 
-    public function provide(): \PDO
+    public function provide(LoggerInterface $logger, UUIDFactoryInterface $UUIDFactory): MySQLClient
     {
         $mysqlUri = $this->envVarsManager->get('MYSQL_URI');
         $mysqlUsername = $this->envVarsManager->get('MYSQL_USERNAME');
@@ -28,9 +31,6 @@ class MySQLClientProvider
             throw new \InvalidArgumentException('MYSQL_PASSWORD must be a string');
         }
 
-        $pdo = new \PDO($mysqlUri, $mysqlUsername, $mysqlPassword);
-        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
-        return $pdo;
+        return new MySQLClient($mysqlUri, $mysqlUsername, $mysqlPassword, $logger, $UUIDFactory);
     }
 }

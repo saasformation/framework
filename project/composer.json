@@ -27,6 +27,7 @@
         "phpunit/phpunit": "^11.4",
         "psr/container": "^2",
         "psr/http-message": "^1",
+        "psr/log": "^3.0",
         "ramsey/uuid": "^4.7",
         "react/http": "^1.10",
         "react/socket": "^1.16",
@@ -45,6 +46,7 @@
         "saasformation/framework-console": "self.version",
         "saasformation/framework-contracts": "self.version",
         "saasformation/framework-env-vars-manager": "self.version",
+        "saasformation/framework-mysql-based-write-model": "self.version",
         "saasformation/framework-projects": "self.version",
         "saasformation/framework-testing": "self.version"
     },
@@ -53,6 +55,7 @@
             "SaaSFormation\\Framework\\Console\\": "packages/console/src",
             "SaaSFormation\\Framework\\Contracts\\": "packages/contracts/src",
             "SaaSFormation\\Framework\\EnvVarsManager\\": "packages/env-vars-manager/src",
+            "SaaSFormation\\Framework\\MySQLBasedWriteModel\\": "packages/mysql-based-write-model/src",
             "SaaSFormation\\Framework\\Projects\\": "packages/projects/src",
             "SaaSFormation\\Framework\\Testing\\": "packages/testing/src"
         }

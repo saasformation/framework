@@ -47,6 +47,8 @@ jobs:
             split_repository: 'framework-testing'
           - local_path: 'console'
             split_repository: 'framework-console'
+          - local_path: 'mysql-based-write-model'
+            split_repository: 'framework-mysql-based-write-model'
     needs: test
     steps:
       - uses: actions/checkout@v4
