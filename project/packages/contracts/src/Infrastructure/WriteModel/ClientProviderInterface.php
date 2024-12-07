@@ -7,5 +7,5 @@ use SaaSFormation\Framework\Contracts\Common\Identity\UUIDFactoryInterface;
 
 interface ClientProviderInterface
 {
-    public function provide(LoggerInterface $logger, UUIDFactoryInterface $UUIDFactory): ClientInterface;
+    public function provide(): ClientInterface;
 }
