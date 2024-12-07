@@ -107,5 +107,6 @@ services:
   SaaSFormation\Framework\Contracts\Application\Bus\QueryBusInterface:
     public: true
     alias: 'SaaSFormation\Framework\Projects\Infrastructure\Bus\TacticianBasedQueryBus'
-
-  SaaSFormation\Framework\Contracts\Common\Identity\UUIDFactoryInterface: '@SaaSFormation\Framework\Projects\Infrastructure\Identity\RamseyBasedUUIDFactory'
+  SaaSFormation\Framework\Contracts\Common\Identity\UUIDFactoryInterface:
+    alias: 'SaaSFormation\Framework\Projects\Infrastructure\Identity\RamseyBasedUUIDFactory'
+    public: true
