@@ -51,6 +51,10 @@ jobs:
             split_repository: 'framework-mysql-based-write-model'
           - local_path: 'mongodb-based-read-model'
             split_repository: 'framework-mongodb-based-read-model'
+          - local_path: 'shared-kernel'
+            split_repository: 'framework-shared-kernel'
+          - local_path: 'message-bus'
+            split_repository: 'framework-message-bus'
     needs: test
     steps:
       - uses: actions/checkout@v4

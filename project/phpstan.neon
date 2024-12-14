@@ -5,6 +5,11 @@ parameters:
 		- packages/env-vars-manager/src
 		- packages/projects/src
 		- packages/console/src
+		- packages/message-bus/src
+		- packages/mongodb-based-read-model/src
+		- packages/mysql-based-write-model/src
+		- packages/shared-kernel/src
+		- packages/testing/src
 		- tests
 includes:
     - vendor/phpstan/phpstan-beberlei-assert/extension.neon

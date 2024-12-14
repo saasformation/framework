@@ -5,11 +5,11 @@ namespace SaaSFormation\Framework\Tests\Projects\Infrastructure;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use SaaSFormation\Framework\Contracts\Infrastructure\EnvVarsManagerInterface;
 use SaaSFormation\Framework\Contracts\Infrastructure\KernelInterface;
 use SaaSFormation\Framework\Projects\Infrastructure\SymfonyContainerProvider;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 #[CoversClass(SymfonyContainerProvider::class)]

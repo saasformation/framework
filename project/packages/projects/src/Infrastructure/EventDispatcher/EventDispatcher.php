@@ -4,9 +4,10 @@ namespace SaaSFormation\Framework\Projects\Infrastructure\EventDispatcher;
 
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
-use SaaSFormation\Framework\Contracts\Application\EventDispatcher\EventDispatcherInterface;
-use SaaSFormation\Framework\Contracts\Application\ListenerInterface;
-use SaaSFormation\Framework\Contracts\Domain\DomainEvent;
+use SaaSFormation\Framework\SharedKernel\Application\EventDispatcher\EventDispatcherInterface;
+use SaaSFormation\Framework\SharedKernel\Application\EventDispatcher\ListenerInterface;
+use SaaSFormation\Framework\SharedKernel\Domain\Messages\AbstractDomainEvent;
+use SaaSFormation\Framework\SharedKernel\Domain\Messages\DomainEventInterface;
 
 class EventDispatcher implements EventDispatcherInterface
 {
@@ -34,18 +35,18 @@ class EventDispatcher implements EventDispatcherInterface
                         if($event->getType() instanceof \ReflectionUnionType || $event->getType() instanceof \ReflectionIntersectionType) {
                             $types = $event->getType()->getTypes();
                             foreach($types as $type) {
-                                if($type instanceof \ReflectionNamedType && $type->getName() !== DomainEvent::class) {
+                                if($type instanceof \ReflectionNamedType && !in_array($type->getName(), [AbstractDomainEvent::class, DomainEventInterface::class])) {
                                     if(class_exists($type->getName())) {
                                         $reflectedType = new \ReflectionClass($type->getName());
-                                        if($reflectedType->getParentClass() && $reflectedType->getParentClass()->getName() === DomainEvent::class) {
-                                            $code = $type->getName()::code();
+                                        if($reflectedType->getParentClass() && $reflectedType->getParentClass()->getName() === AbstractDomainEvent::class) {
+                                            $code = $type->getName()::getDomainEventCode();
                                             if(is_string($code)) {
                                                 $this->map[$code][] = $service;
                                                 $this->logger->debug("Event handler $class for event with code $code has been registered");
                                             }
                                         }
                                     } else {
-                                        throw new \Exception("Event type not found");
+                                        throw new \Exception("Event type not found: " . $type->getName());
                                     }
                                 }
                             }
@@ -60,10 +61,10 @@ class EventDispatcher implements EventDispatcherInterface
         }
     }
 
-    public function dispatch(DomainEvent $event): void
+    public function dispatch(DomainEventInterface $event): void
     {
-        if(isset($this->map[$event->code()])) {
-            foreach($this->map[$event->code()] as $handler) {
+        if(isset($this->map[$event->getDomainEventCode()])) {
+            foreach($this->map[$event->getDomainEventCode()] as $handler) {
                 $handler->listen($event);
             }
         }

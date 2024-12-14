@@ -2,7 +2,7 @@
 
 namespace SaaSFormation\Framework\Tests\Contracts\Application\Bus;
 
-use SaaSFormation\Framework\Contracts\Application\Bus\PageableQueryResult;
+use SaaSFormation\Framework\SharedKernel\Application\Messages\PageableQueryResult;
 
 class MockPageableQueryResult
 {

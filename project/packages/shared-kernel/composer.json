@@ -1,0 +1,24 @@
+{
+    "name": "saasformation/framework-shared-kernel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SaaSFormation",
+            "email": "info@saasformation.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SaaSFormation\\Framework\\SharedKernel\\": "src"
+        }
+    },
+    "require": {
+        "php": "^8.3"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        }
+    }
+}

@@ -2,7 +2,7 @@
 
 namespace SaaSFormation\Framework\Tests\Contracts\UI\HTTP;
 
-use SaaSFormation\Framework\Contracts\UI\HTTP\PageableResponseBody;
+use SaaSFormation\Framework\SharedKernel\UI\HTTP\PageableResponseBody;
 
 class MockPageableResponseBody
 {
