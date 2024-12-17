@@ -7,6 +7,7 @@ use SaaSFormation\Framework\SharedKernel\Common\Identity\IdInterface;
 abstract class AbstractCommand implements CommandInterface
 {
     private ?IdInterface $commandId = null;
+    private CommandStatusEnum $status = CommandStatusEnum::PENDING;
     private ?IdInterface $requestId = null;
     private ?IdInterface $correlationId = null;
     private ?IdInterface $executorId = null;
@@ -14,6 +15,11 @@ abstract class AbstractCommand implements CommandInterface
     public function getCommandId(): ?IdInterface
     {
         return $this->commandId;
+    }
+
+    public function getStatus(): CommandStatusEnum
+    {
+        return $this->status;
     }
 
     public function getRequestId(): ?IdInterface
@@ -34,6 +40,16 @@ abstract class AbstractCommand implements CommandInterface
     public function setCommandId(IdInterface $commandId): void
     {
         $this->commandId = $commandId;
+    }
+
+    public function markAsSucceeded(): void
+    {
+        $this->status = CommandStatusEnum::SUCCEEDED;
+    }
+
+    public function markAsFailed(): void
+    {
+        $this->status = CommandStatusEnum::FAILED;
     }
 
     public function setRequestId(IdInterface $requestId): void

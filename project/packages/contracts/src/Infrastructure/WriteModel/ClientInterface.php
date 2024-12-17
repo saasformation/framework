@@ -2,15 +2,21 @@
 
 namespace SaaSFormation\Framework\Contracts\Infrastructure\WriteModel;
 
+use SaaSFormation\Framework\SharedKernel\Application\Messages\CommandInterface;
 use SaaSFormation\Framework\SharedKernel\Common\Identity\IdInterface;
 use SaaSFormation\Framework\SharedKernel\Domain\Messages\DomainEventInterface;
 
 interface ClientInterface
 {
     public function beginTransaction(): void;
+
     public function commitTransaction(): void;
+
     public function rollbackTransaction(): void;
+
     public function save(DomainEventInterface $domainEvent): void;
+
+    public function saveCommand(CommandInterface $command): void;
 
     /**
      * @param IdInterface $aggregateId
