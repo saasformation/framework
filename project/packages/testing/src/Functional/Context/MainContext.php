@@ -11,9 +11,13 @@ use SaaSFormation\Framework\Contracts\Infrastructure\API\RequestProcessorInterfa
 use SaaSFormation\Framework\Contracts\Infrastructure\KernelInterface;
 use SaaSFormation\Framework\Contracts\Infrastructure\WriteModel\ClientInterface;
 use SaaSFormation\Framework\Contracts\Infrastructure\WriteModel\ClientProviderInterface;
+use SaaSFormation\Framework\MongoDBBasedReadModel\Infrastructure\ReadModel\MongoDBClient;
+use SaaSFormation\Framework\MongoDBBasedReadModel\Infrastructure\ReadModel\MongoDBClientProvider;
 use SaaSFormation\Framework\Projects\Infrastructure\API\DefaultRequestErrorProcessor;
 use SaaSFormation\Framework\Projects\Infrastructure\API\DefaultRequestProcessor;
 use SaaSFormation\Framework\Projects\Infrastructure\API\LeagueRouterProvider;
+use SaaSFormation\Framework\SharedKernel\Common\Identity\IdInterface;
+use SaaSFormation\Framework\SharedKernel\Common\Identity\UUIDFactoryInterface;
 
 final class MainContext implements Context
 {
@@ -31,18 +35,27 @@ final class MainContext implements Context
     private RequestProcessorInterface $requestProcessor;
 
     private ClientInterface $writeModelClient;
+    private MongoDBClient $mongoDBClient;
+
+    public static IdInterface $requestId;
 
     public function __construct(
-        private readonly KernelInterface $kernel,
-        readonly ClientProviderInterface $writeModelClientProvider
+        private readonly KernelInterface       $kernel,
+        readonly ClientProviderInterface       $writeModelClientProvider,
+        private readonly MongoDBClientProvider $mongoDBClientProvider,
+        private UUIDFactoryInterface           $UUIDFactory
     )
     {
         $this->requestProcessor = new DefaultRequestProcessor(
             (new LeagueRouterProvider())->provide($this->kernel->container()),
             new DefaultRequestErrorProcessor($this->kernel->logger()),
-            $kernel
+            $kernel,
+            $this->mongoDBClientProvider->provide()
         );
         $this->writeModelClient = $this->writeModelClientProvider->provide();
+        $this->mongoDBClient = $this->mongoDBClientProvider->provide();
+        self::$requestId = $this->UUIDFactory->generate();
+        $this->mongoDBClient->startSession(self::$requestId);
     }
 
     /**
@@ -51,6 +64,7 @@ final class MainContext implements Context
     public function beforeScenario(): void
     {
         $this->writeModelClient->beginTransaction();
+        $this->mongoDBClient->beginTransaction(self::$requestId);
     }
 
     /**
@@ -60,6 +74,7 @@ final class MainContext implements Context
     {
         $this->response = null;
         $this->writeModelClient->rollbackTransaction();
+        $this->mongoDBClient->rollbackTransaction(self::$requestId);
     }
 
     /**
@@ -84,7 +99,8 @@ final class MainContext implements Context
             $path,
             array_merge($this->headers, [
                 'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
+                'request-id' => $this->requestId->humanReadable()
             ]),
             $string ? $string->getRaw() : ""
         );

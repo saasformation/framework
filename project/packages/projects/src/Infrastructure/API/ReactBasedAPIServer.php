@@ -2,6 +2,7 @@
 
 namespace SaaSFormation\Framework\Projects\Infrastructure\API;
 
+use Assert\Assert;
 use React\EventLoop\Loop;
 use React\Http\HttpServer;
 use React\Http\Middleware\LimitConcurrentRequestsMiddleware;
@@ -15,7 +16,9 @@ use SaaSFormation\Framework\Contracts\Infrastructure\API\RequestErrorProcessorIn
 use SaaSFormation\Framework\Contracts\Infrastructure\API\RequestProcessorInterface;
 use SaaSFormation\Framework\Contracts\Infrastructure\API\RouterInterface;
 use SaaSFormation\Framework\Contracts\Infrastructure\API\RouterProviderInterface;
+use SaaSFormation\Framework\Contracts\Infrastructure\EnvVarsManagerInterface;
 use SaaSFormation\Framework\Contracts\Infrastructure\KernelInterface;
+use SaaSFormation\Framework\MongoDBBasedReadModel\Infrastructure\ReadModel\MongoDBClientProvider;
 
 readonly class ReactBasedAPIServer implements APIServerInterface
 {
@@ -33,7 +36,9 @@ readonly class ReactBasedAPIServer implements APIServerInterface
         }
 
         if(!$requestProcessor) {
-            $requestProcessor = new DefaultRequestProcessor($this->router, $requestErrorProcessor, $this->kernel);
+            $mongoDBClientProvider = $this->kernel->container()->get(MongoDBClientProvider::class);
+            Assert::that($mongoDBClientProvider)->isInstanceOf(MongoDBClientProvider::class);
+            $requestProcessor = new DefaultRequestProcessor($this->router, $requestErrorProcessor, $this->kernel, ($mongoDBClientProvider)->provide());
         }
 
         $loop = Loop::get();
